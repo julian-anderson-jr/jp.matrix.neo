@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <classPathEntry location="/usr/src/neo/lib/ojdbc14.jar" />
+  <context id="OracleTables" targetRuntime="MyBatis3">
+	<commentGenerator>
+		<property name="suppressAllComments" value="true" />
+	</commentGenerator>
+
+    <!--  DB への接続設定 -->
+    <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+        connectionURL="jdbc:oracle:thin:@localhost:1521:XE"
+        userId="poko"
+        password="poko">
+    </jdbcConnection>
+
+	<javaTypeResolver>
+		<property name="forceBigDecimals" value="false" />
+	</javaTypeResolver>
+
+    <!-- SELECT 結果等を格納するドメインモデルを生成する設定 -->
+    <javaModelGenerator targetPackage="jp.matrix.dao" targetProject="neo/src/main/java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+
+    <!-- SQL 設定が記述された XML を生成する設定 -->
+    <sqlMapGenerator targetPackage="mapper" targetProject="neo/src/main/resources">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+    <!-- マッパークラスを生成する設定 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="jp.matrix.mapper" targetProject="neo/src/main/java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+
+    <table schema="POKO" tableName="USERINFO">
+      <property name="useActualColumnNames" value="true" />
+    </table>
+
+    <table schema="POKO" tableName="GROUPINFO">
+      <property name="useActualColumnNames" value="true" />
+    </table>
+
+    <table schema="POKO" tableName="PARTS">
+      <property name="useActualColumnNames" value="true" />
+    </table>
+
+    <table schema="POKO" tableName="BUYLIST">
+      <property name="useActualColumnNames" value="true" />
+    </table>
+
+  </context>
+</generatorConfiguration>

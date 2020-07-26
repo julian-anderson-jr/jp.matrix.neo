@@ -1,0 +1,27 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Sign up main</title>
+<link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+<script th:src="@{/js/jquery-3.5.1.min.js}"></script> 
+</head>
+<body th:object="${userViewModel}">
+<form name="signedup" method="POST" th:ACTION="@{/signedup}">
+<table>
+<tr><td colspan="3">ユーザー登録</td></tr>
+<tr><td>ユーザーID</td>
+<td><input type="text" maxlength="10" th:field="*{userId}" placeholder="USERID" /><span class="text-danger">*</span>
+</td><td><span id="UserId-errors" th:errors="*{userId}" class="text-danger">error</span>
+</td></tr>
+<tr><td>パスワード</td><td><input type="password" maxlength="20" th:field="*{newPassword}" placeholder="NewPassword" /><span class="text-danger">*</span>
+</td><td><span id="newPassword-errors" th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}" class="text-danger"></span>
+</td></tr>
+<tr><td>パスワード(再入力)</td><td><input type="password" maxlength="20" th:field="*{retryPassword}" placeholder="NewPassword" /><span class="text-danger">*</span>
+</td><td><span id="retryPassword-errors" th:if="${#fields.hasErrors('retryPassword')}" th:errors="*{retryPassword}" class="text-danger"></span>
+</td></tr>
+<tr><td colspan="3"><input type="submit" name="submit" value="登録" class="btn btn-default"/></td></tr>
+</table>
+</form>
+</body>
+</html>
