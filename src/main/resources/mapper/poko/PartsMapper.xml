@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.matrix.mapper.poko.PartsMapper">
   <resultMap id="BaseResultMap" type="jp.matrix.dao.poko.Parts">
-    <id column="PID" jdbcType="NUMERIC" property="PID" />
-    <result column="PNAME" jdbcType="NVARCHAR" property="PNAME" />
-    <result column="PRICE" jdbcType="NUMERIC" property="PRICE" />
+    <id column="PID" jdbcType="DECIMAL" property="PID" />
+    <result column="PNAME" jdbcType="VARCHAR" property="PNAME" />
+    <result column="PRICE" jdbcType="DECIMAL" property="PRICE" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -85,11 +85,11 @@
     select 
     <include refid="Base_Column_List" />
     from POKO.PARTS
-    where PID = #{PID,jdbcType=NUMERIC}
+    where PID = #{PID,jdbcType=DECIMAL}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from POKO.PARTS
-    where PID = #{PID,jdbcType=NUMERIC}
+    where PID = #{PID,jdbcType=DECIMAL}
   </delete>
   <delete id="deleteByExample" parameterType="jp.matrix.dao.poko.PartsExample">
     delete from POKO.PARTS
@@ -100,7 +100,7 @@
   <insert id="insert" parameterType="jp.matrix.dao.poko.Parts">
     insert into POKO.PARTS (PID, PNAME, PRICE
       )
-    values (#{PID,jdbcType=NUMERIC}, #{PNAME,jdbcType=NVARCHAR}, #{PRICE,jdbcType=NUMERIC}
+    values (#{PID,jdbcType=DECIMAL}, #{PNAME,jdbcType=VARCHAR}, #{PRICE,jdbcType=DECIMAL}
       )
   </insert>
   <insert id="insertSelective" parameterType="jp.matrix.dao.poko.Parts">
@@ -118,13 +118,13 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="PID != null">
-        #{PID,jdbcType=NUMERIC},
+        #{PID,jdbcType=DECIMAL},
       </if>
       <if test="PNAME != null">
-        #{PNAME,jdbcType=NVARCHAR},
+        #{PNAME,jdbcType=VARCHAR},
       </if>
       <if test="PRICE != null">
-        #{PRICE,jdbcType=NUMERIC},
+        #{PRICE,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -138,13 +138,13 @@
     update POKO.PARTS
     <set>
       <if test="record.PID != null">
-        PID = #{record.PID,jdbcType=NUMERIC},
+        PID = #{record.PID,jdbcType=DECIMAL},
       </if>
       <if test="record.PNAME != null">
-        PNAME = #{record.PNAME,jdbcType=NVARCHAR},
+        PNAME = #{record.PNAME,jdbcType=VARCHAR},
       </if>
       <if test="record.PRICE != null">
-        PRICE = #{record.PRICE,jdbcType=NUMERIC},
+        PRICE = #{record.PRICE,jdbcType=DECIMAL},
       </if>
     </set>
     <if test="_parameter != null">
@@ -153,9 +153,9 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update POKO.PARTS
-    set PID = #{record.PID,jdbcType=NUMERIC},
-      PNAME = #{record.PNAME,jdbcType=NVARCHAR},
-      PRICE = #{record.PRICE,jdbcType=NUMERIC}
+    set PID = #{record.PID,jdbcType=DECIMAL},
+      PNAME = #{record.PNAME,jdbcType=VARCHAR},
+      PRICE = #{record.PRICE,jdbcType=DECIMAL}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -164,18 +164,18 @@
     update POKO.PARTS
     <set>
       <if test="PNAME != null">
-        PNAME = #{PNAME,jdbcType=NVARCHAR},
+        PNAME = #{PNAME,jdbcType=VARCHAR},
       </if>
       <if test="PRICE != null">
-        PRICE = #{PRICE,jdbcType=NUMERIC},
+        PRICE = #{PRICE,jdbcType=DECIMAL},
       </if>
     </set>
-    where PID = #{PID,jdbcType=NUMERIC}
+    where PID = #{PID,jdbcType=DECIMAL}
   </update>
   <update id="updateByPrimaryKey" parameterType="jp.matrix.dao.poko.Parts">
     update POKO.PARTS
-    set PNAME = #{PNAME,jdbcType=NVARCHAR},
-      PRICE = #{PRICE,jdbcType=NUMERIC}
-    where PID = #{PID,jdbcType=NUMERIC}
+    set PNAME = #{PNAME,jdbcType=VARCHAR},
+      PRICE = #{PRICE,jdbcType=DECIMAL}
+    where PID = #{PID,jdbcType=DECIMAL}
   </update>
 </mapper>

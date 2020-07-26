@@ -2,10 +2,22 @@ package jp.matrix.app.controller;
 
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriComponentsBuilder;
 
+
+import jp.matrix.app.AppConfig;
+import jp.matrix.service.UserRepository;
 import jp.matrix.viewModel.UserViewModel;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.logging.log4j.util.Strings;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.http.server.ServletServerHttpRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +26,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
-@RequestMapping(value={"signedup"})
+@RequestMapping(value={"/signedup"})
 @Slf4j
 public class signedupController {
 	@RequestMapping(method = RequestMethod.GET)
@@ -30,20 +42,59 @@ public class signedupController {
 		return mav;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView change(@Validated @ModelAttribute UserViewModel form, BindingResult result, ModelAndView model)
+	public ModelAndView change(@Validated @ModelAttribute UserViewModel form, BindingResult result, ModelAndView model, HttpServletRequest request)
 	{
+		model.addObject("userViewModel", form);
 		if (result.hasErrors())
 		{
-			UserViewModel mo = new UserViewModel();
-			mo.setUserId(form.getUserId());
-			mo.setNewPassword("");
-			mo.setRetryPassword("");
-			log.info("has error: {}", result.getFieldError());
+			model.setViewName("signedup.html");
+			return model;
 		}
-		
-		model.setViewName("signedup.html");
+		if (Strings.isNotBlank(form.getNewPassword()) 
+				&& Strings.isNotBlank(form.getRetryPassword())
+				&& form.getNewPassword().equals(form.getRetryPassword()))
+		{
+			ApplicationContext context = (ApplicationContext)new AnnotationConfigApplicationContext(AppConfig.class);
+			UserRepository us = context.getBean("userRespository", UserRepository.class);
+			BCryptPasswordEncoder enc = context.getBean("passwordEncoder", BCryptPasswordEncoder.class);
+			User user = new User();
+			user.setName(form.getUserId());
+			user.setPassword(enc.encode(form.getNewPassword()));
+			if (us.countByUsername(user.getName())> 0)
+			{
+				form.setMsg("登録済みのため、登録できません。");
+				model.addObject("userViewModel", form);
+				model.setViewName("signedup.html");
+				return model;
+			}
+			us.save(user);
+			log.debug("CREATE USER:" + form.getUserId());
+		}
+		else
+		{
+			form.setMsg("パスワードが一致していません。");
+			model.addObject("userViewModel", form);
+			model.setViewName("signedup.html");
+			return model;
+		}
+	    org.springframework.http.HttpRequest req = new ServletServerHttpRequest(request);
+	    UriComponentsBuilder builder = UriComponentsBuilder.fromHttpRequest(req);
+
+	    java.net.URI location = builder.path("/signresult").build().toUri();
+
+		model.setViewName("redirect:" + location.toString());
 		model.addObject("userViewModel", form);
 		
 		return model;
 	}
+	
+	@RequestMapping(value={"/signresult"}, method = RequestMethod.POST)
+	public ModelAndView result(@ModelAttribute UserViewModel form, ModelAndView model)
+	{
+		model.setViewName("signresult.html");
+		model.addObject("userViewModel", form);
+		
+		return model;
+	}
+	
 }

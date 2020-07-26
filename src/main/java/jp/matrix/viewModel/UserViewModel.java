@@ -27,4 +27,5 @@ public class UserViewModel {
 	@Size(min = 8, max = 20, message = "パスワードは文字8桁～20桁ではありません")
 	private String retryPassword;
 
+	private String msg;
 }

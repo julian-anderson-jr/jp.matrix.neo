@@ -25,8 +25,8 @@ end;
 
 create table USERINFO
 (
-	SID nvarchar2(200) not null
-,	PWD nvarchar2(200) not null
+	SID varchar2(200) not null
+,	PWD varchar2(200) not null
 ,	GPID number(5,0)
 ,	LVL number(1,0) default 0
 ,	LOCKING number(1,0) default 0
@@ -50,7 +50,7 @@ commit;
 create table PARTS
 (
 	PID number(5,0) not null
-,	PNAME nvarchar2(200) not null
+,	PNAME varchar2(200) not null
 ,	PRICE number(5,0) default 0
 ,	constraint PK_PARTS PRIMARY KEY (PID)
 );

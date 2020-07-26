@@ -174,62 +174,52 @@ public class GroupinfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andGPNAMEEqualTo(String value) {
+        public Criteria andGPNAMEEqualTo(Object value) {
             addCriterion("GPNAME =", value, "GPNAME");
             return (Criteria) this;
         }
 
-        public Criteria andGPNAMENotEqualTo(String value) {
+        public Criteria andGPNAMENotEqualTo(Object value) {
             addCriterion("GPNAME <>", value, "GPNAME");
             return (Criteria) this;
         }
 
-        public Criteria andGPNAMEGreaterThan(String value) {
+        public Criteria andGPNAMEGreaterThan(Object value) {
             addCriterion("GPNAME >", value, "GPNAME");
             return (Criteria) this;
         }
 
-        public Criteria andGPNAMEGreaterThanOrEqualTo(String value) {
+        public Criteria andGPNAMEGreaterThanOrEqualTo(Object value) {
             addCriterion("GPNAME >=", value, "GPNAME");
             return (Criteria) this;
         }
 
-        public Criteria andGPNAMELessThan(String value) {
+        public Criteria andGPNAMELessThan(Object value) {
             addCriterion("GPNAME <", value, "GPNAME");
             return (Criteria) this;
         }
 
-        public Criteria andGPNAMELessThanOrEqualTo(String value) {
+        public Criteria andGPNAMELessThanOrEqualTo(Object value) {
             addCriterion("GPNAME <=", value, "GPNAME");
             return (Criteria) this;
         }
 
-        public Criteria andGPNAMELike(String value) {
-            addCriterion("GPNAME like", value, "GPNAME");
-            return (Criteria) this;
-        }
-
-        public Criteria andGPNAMENotLike(String value) {
-            addCriterion("GPNAME not like", value, "GPNAME");
-            return (Criteria) this;
-        }
-
-        public Criteria andGPNAMEIn(List<String> values) {
+        public Criteria andGPNAMEIn(List<Object> values) {
             addCriterion("GPNAME in", values, "GPNAME");
             return (Criteria) this;
         }
 
-        public Criteria andGPNAMENotIn(List<String> values) {
+        public Criteria andGPNAMENotIn(List<Object> values) {
             addCriterion("GPNAME not in", values, "GPNAME");
             return (Criteria) this;
         }
 
-        public Criteria andGPNAMEBetween(String value1, String value2) {
+        public Criteria andGPNAMEBetween(Object value1, Object value2) {
             addCriterion("GPNAME between", value1, value2, "GPNAME");
             return (Criteria) this;
         }
 
-        public Criteria andGPNAMENotBetween(String value1, String value2) {
+        public Criteria andGPNAMENotBetween(Object value1, Object value2) {
             addCriterion("GPNAME not between", value1, value2, "GPNAME");
             return (Criteria) this;
         }

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.matrix.mapper.poko.BuylistMapper">
   <resultMap id="BaseResultMap" type="jp.matrix.dao.poko.Buylist">
-    <id column="BID" jdbcType="NUMERIC" property="BID" />
-    <id column="SERIAL" jdbcType="NUMERIC" property="SERIAL" />
-    <result column="PID" jdbcType="NUMERIC" property="PID" />
+    <id column="BID" jdbcType="DECIMAL" property="BID" />
+    <id column="SERIAL" jdbcType="DECIMAL" property="SERIAL" />
+    <result column="PID" jdbcType="DECIMAL" property="PID" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -85,13 +85,13 @@
     select 
     <include refid="Base_Column_List" />
     from POKO.BUYLIST
-    where BID = #{BID,jdbcType=NUMERIC}
-      and SERIAL = #{SERIAL,jdbcType=NUMERIC}
+    where BID = #{BID,jdbcType=DECIMAL}
+      and SERIAL = #{SERIAL,jdbcType=DECIMAL}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="jp.matrix.dao.poko.BuylistKey">
     delete from POKO.BUYLIST
-    where BID = #{BID,jdbcType=NUMERIC}
-      and SERIAL = #{SERIAL,jdbcType=NUMERIC}
+    where BID = #{BID,jdbcType=DECIMAL}
+      and SERIAL = #{SERIAL,jdbcType=DECIMAL}
   </delete>
   <delete id="deleteByExample" parameterType="jp.matrix.dao.poko.BuylistExample">
     delete from POKO.BUYLIST
@@ -102,7 +102,7 @@
   <insert id="insert" parameterType="jp.matrix.dao.poko.Buylist">
     insert into POKO.BUYLIST (BID, SERIAL, PID
       )
-    values (#{BID,jdbcType=NUMERIC}, #{SERIAL,jdbcType=NUMERIC}, #{PID,jdbcType=NUMERIC}
+    values (#{BID,jdbcType=DECIMAL}, #{SERIAL,jdbcType=DECIMAL}, #{PID,jdbcType=DECIMAL}
       )
   </insert>
   <insert id="insertSelective" parameterType="jp.matrix.dao.poko.Buylist">
@@ -120,13 +120,13 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="BID != null">
-        #{BID,jdbcType=NUMERIC},
+        #{BID,jdbcType=DECIMAL},
       </if>
       <if test="SERIAL != null">
-        #{SERIAL,jdbcType=NUMERIC},
+        #{SERIAL,jdbcType=DECIMAL},
       </if>
       <if test="PID != null">
-        #{PID,jdbcType=NUMERIC},
+        #{PID,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -140,13 +140,13 @@
     update POKO.BUYLIST
     <set>
       <if test="record.BID != null">
-        BID = #{record.BID,jdbcType=NUMERIC},
+        BID = #{record.BID,jdbcType=DECIMAL},
       </if>
       <if test="record.SERIAL != null">
-        SERIAL = #{record.SERIAL,jdbcType=NUMERIC},
+        SERIAL = #{record.SERIAL,jdbcType=DECIMAL},
       </if>
       <if test="record.PID != null">
-        PID = #{record.PID,jdbcType=NUMERIC},
+        PID = #{record.PID,jdbcType=DECIMAL},
       </if>
     </set>
     <if test="_parameter != null">
@@ -155,9 +155,9 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update POKO.BUYLIST
-    set BID = #{record.BID,jdbcType=NUMERIC},
-      SERIAL = #{record.SERIAL,jdbcType=NUMERIC},
-      PID = #{record.PID,jdbcType=NUMERIC}
+    set BID = #{record.BID,jdbcType=DECIMAL},
+      SERIAL = #{record.SERIAL,jdbcType=DECIMAL},
+      PID = #{record.PID,jdbcType=DECIMAL}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -166,16 +166,16 @@
     update POKO.BUYLIST
     <set>
       <if test="PID != null">
-        PID = #{PID,jdbcType=NUMERIC},
+        PID = #{PID,jdbcType=DECIMAL},
       </if>
     </set>
-    where BID = #{BID,jdbcType=NUMERIC}
-      and SERIAL = #{SERIAL,jdbcType=NUMERIC}
+    where BID = #{BID,jdbcType=DECIMAL}
+      and SERIAL = #{SERIAL,jdbcType=DECIMAL}
   </update>
   <update id="updateByPrimaryKey" parameterType="jp.matrix.dao.poko.Buylist">
     update POKO.BUYLIST
-    set PID = #{PID,jdbcType=NUMERIC}
-    where BID = #{BID,jdbcType=NUMERIC}
-      and SERIAL = #{SERIAL,jdbcType=NUMERIC}
+    set PID = #{PID,jdbcType=DECIMAL}
+    where BID = #{BID,jdbcType=DECIMAL}
+      and SERIAL = #{SERIAL,jdbcType=DECIMAL}
   </update>
 </mapper>

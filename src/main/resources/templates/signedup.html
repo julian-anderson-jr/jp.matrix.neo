@@ -20,7 +20,8 @@
 <tr><td>パスワード(再入力)</td><td><input type="password" maxlength="20" th:field="*{retryPassword}" placeholder="NewPassword" /><span class="text-danger">*</span>
 </td><td><span id="retryPassword-errors" th:if="${#fields.hasErrors('retryPassword')}" th:errors="*{retryPassword}" class="text-danger"></span>
 </td></tr>
-<tr><td colspan="3"><input type="submit" name="submit" value="登録" class="btn btn-default"/></td></tr>
+<tr><td colspan="3"><input type="submit" name="submit" value="登録" class="btn btn-outline-secondary"/></td></tr>
+<tr><td colspan="3"><span id="errors" th:text="*{msg}" class="text-danger"></span></td></tr>
 </table>
 </form>
 </body>

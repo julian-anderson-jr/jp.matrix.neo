@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.matrix.mapper.poko.GroupinfoMapper">
   <resultMap id="BaseResultMap" type="jp.matrix.dao.poko.Groupinfo">
-    <id column="GPID" jdbcType="NUMERIC" property="GPID" />
-    <result column="GPNAME" jdbcType="NVARCHAR" property="GPNAME" />
+    <id column="GPID" jdbcType="DECIMAL" property="GPID" />
+    <result column="GPNAME" jdbcType="OTHER" property="GPNAME" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -84,11 +84,11 @@
     select 
     <include refid="Base_Column_List" />
     from POKO.GROUPINFO
-    where GPID = #{GPID,jdbcType=NUMERIC}
+    where GPID = #{GPID,jdbcType=DECIMAL}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from POKO.GROUPINFO
-    where GPID = #{GPID,jdbcType=NUMERIC}
+    where GPID = #{GPID,jdbcType=DECIMAL}
   </delete>
   <delete id="deleteByExample" parameterType="jp.matrix.dao.poko.GroupinfoExample">
     delete from POKO.GROUPINFO
@@ -98,7 +98,7 @@
   </delete>
   <insert id="insert" parameterType="jp.matrix.dao.poko.Groupinfo">
     insert into POKO.GROUPINFO (GPID, GPNAME)
-    values (#{GPID,jdbcType=NUMERIC}, #{GPNAME,jdbcType=NVARCHAR})
+    values (#{GPID,jdbcType=DECIMAL}, #{GPNAME,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="jp.matrix.dao.poko.Groupinfo">
     insert into POKO.GROUPINFO
@@ -112,10 +112,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="GPID != null">
-        #{GPID,jdbcType=NUMERIC},
+        #{GPID,jdbcType=DECIMAL},
       </if>
       <if test="GPNAME != null">
-        #{GPNAME,jdbcType=NVARCHAR},
+        #{GPNAME,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -129,10 +129,10 @@
     update POKO.GROUPINFO
     <set>
       <if test="record.GPID != null">
-        GPID = #{record.GPID,jdbcType=NUMERIC},
+        GPID = #{record.GPID,jdbcType=DECIMAL},
       </if>
       <if test="record.GPNAME != null">
-        GPNAME = #{record.GPNAME,jdbcType=NVARCHAR},
+        GPNAME = #{record.GPNAME,jdbcType=OTHER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -141,8 +141,8 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update POKO.GROUPINFO
-    set GPID = #{record.GPID,jdbcType=NUMERIC},
-      GPNAME = #{record.GPNAME,jdbcType=NVARCHAR}
+    set GPID = #{record.GPID,jdbcType=DECIMAL},
+      GPNAME = #{record.GPNAME,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -151,14 +151,14 @@
     update POKO.GROUPINFO
     <set>
       <if test="GPNAME != null">
-        GPNAME = #{GPNAME,jdbcType=NVARCHAR},
+        GPNAME = #{GPNAME,jdbcType=OTHER},
       </if>
     </set>
-    where GPID = #{GPID,jdbcType=NUMERIC}
+    where GPID = #{GPID,jdbcType=DECIMAL}
   </update>
   <update id="updateByPrimaryKey" parameterType="jp.matrix.dao.poko.Groupinfo">
     update POKO.GROUPINFO
-    set GPNAME = #{GPNAME,jdbcType=NVARCHAR}
-    where GPID = #{GPID,jdbcType=NUMERIC}
+    set GPNAME = #{GPNAME,jdbcType=OTHER}
+    where GPID = #{GPID,jdbcType=DECIMAL}
   </update>
 </mapper>

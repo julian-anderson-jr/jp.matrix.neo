@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.matrix.mapper.poko.UserinfoMapper">
   <resultMap id="BaseResultMap" type="jp.matrix.dao.poko.Userinfo">
-    <id column="SID" jdbcType="NVARCHAR" property="SID" />
-    <result column="PWD" jdbcType="NVARCHAR" property="PWD" />
-    <result column="GPID" jdbcType="NUMERIC" property="GPID" />
-    <result column="LVL" jdbcType="NUMERIC" property="LVL" />
-    <result column="LOCKING" jdbcType="NUMERIC" property="LOCKING" />
-    <result column="UPDT" jdbcType="TIMESTAMP" property="UPDT" />
-    <result column="CRDT" jdbcType="TIMESTAMP" property="CRDT" />
+    <id column="SID" jdbcType="VARCHAR" property="SID" />
+    <result column="PWD" jdbcType="VARCHAR" property="PWD" />
+    <result column="GPID" jdbcType="DECIMAL" property="GPID" />
+    <result column="LVL" jdbcType="DECIMAL" property="LVL" />
+    <result column="LOCKING" jdbcType="DECIMAL" property="LOCKING" />
+    <result column="UPDT" jdbcType="DATE" property="UPDT" />
+    <result column="CRDT" jdbcType="DATE" property="CRDT" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -89,11 +89,11 @@
     select 
     <include refid="Base_Column_List" />
     from POKO.USERINFO
-    where SID = #{SID,jdbcType=NVARCHAR}
+    where SID = #{SID,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from POKO.USERINFO
-    where SID = #{SID,jdbcType=NVARCHAR}
+    where SID = #{SID,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="jp.matrix.dao.poko.UserinfoExample">
     delete from POKO.USERINFO
@@ -103,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="jp.matrix.dao.poko.Userinfo">
     insert into POKO.USERINFO (SID, PWD, GPID, 
-      LVL, LOCKING, UPDT, 
-      CRDT)
-    values (#{SID,jdbcType=NVARCHAR}, #{PWD,jdbcType=NVARCHAR}, #{GPID,jdbcType=NUMERIC}, 
-      #{LVL,jdbcType=NUMERIC}, #{LOCKING,jdbcType=NUMERIC}, #{UPDT,jdbcType=TIMESTAMP}, 
-      #{CRDT,jdbcType=TIMESTAMP})
+      LVL, LOCKING, UPDT, CRDT
+      )
+    values (#{SID,jdbcType=VARCHAR}, #{PWD,jdbcType=VARCHAR}, #{GPID,jdbcType=DECIMAL}, 
+      #{LVL,jdbcType=DECIMAL}, #{LOCKING,jdbcType=DECIMAL}, #{UPDT,jdbcType=DATE}, #{CRDT,jdbcType=DATE}
+      )
   </insert>
   <insert id="insertSelective" parameterType="jp.matrix.dao.poko.Userinfo">
     insert into POKO.USERINFO
@@ -136,25 +136,25 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="SID != null">
-        #{SID,jdbcType=NVARCHAR},
+        #{SID,jdbcType=VARCHAR},
       </if>
       <if test="PWD != null">
-        #{PWD,jdbcType=NVARCHAR},
+        #{PWD,jdbcType=VARCHAR},
       </if>
       <if test="GPID != null">
-        #{GPID,jdbcType=NUMERIC},
+        #{GPID,jdbcType=DECIMAL},
       </if>
       <if test="LVL != null">
-        #{LVL,jdbcType=NUMERIC},
+        #{LVL,jdbcType=DECIMAL},
       </if>
       <if test="LOCKING != null">
-        #{LOCKING,jdbcType=NUMERIC},
+        #{LOCKING,jdbcType=DECIMAL},
       </if>
       <if test="UPDT != null">
-        #{UPDT,jdbcType=TIMESTAMP},
+        #{UPDT,jdbcType=DATE},
       </if>
       <if test="CRDT != null">
-        #{CRDT,jdbcType=TIMESTAMP},
+        #{CRDT,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -168,25 +168,25 @@
     update POKO.USERINFO
     <set>
       <if test="record.SID != null">
-        SID = #{record.SID,jdbcType=NVARCHAR},
+        SID = #{record.SID,jdbcType=VARCHAR},
       </if>
       <if test="record.PWD != null">
-        PWD = #{record.PWD,jdbcType=NVARCHAR},
+        PWD = #{record.PWD,jdbcType=VARCHAR},
       </if>
       <if test="record.GPID != null">
-        GPID = #{record.GPID,jdbcType=NUMERIC},
+        GPID = #{record.GPID,jdbcType=DECIMAL},
       </if>
       <if test="record.LVL != null">
-        LVL = #{record.LVL,jdbcType=NUMERIC},
+        LVL = #{record.LVL,jdbcType=DECIMAL},
       </if>
       <if test="record.LOCKING != null">
-        LOCKING = #{record.LOCKING,jdbcType=NUMERIC},
+        LOCKING = #{record.LOCKING,jdbcType=DECIMAL},
       </if>
       <if test="record.UPDT != null">
-        UPDT = #{record.UPDT,jdbcType=TIMESTAMP},
+        UPDT = #{record.UPDT,jdbcType=DATE},
       </if>
       <if test="record.CRDT != null">
-        CRDT = #{record.CRDT,jdbcType=TIMESTAMP},
+        CRDT = #{record.CRDT,jdbcType=DATE},
       </if>
     </set>
     <if test="_parameter != null">
@@ -195,13 +195,13 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update POKO.USERINFO
-    set SID = #{record.SID,jdbcType=NVARCHAR},
-      PWD = #{record.PWD,jdbcType=NVARCHAR},
-      GPID = #{record.GPID,jdbcType=NUMERIC},
-      LVL = #{record.LVL,jdbcType=NUMERIC},
-      LOCKING = #{record.LOCKING,jdbcType=NUMERIC},
-      UPDT = #{record.UPDT,jdbcType=TIMESTAMP},
-      CRDT = #{record.CRDT,jdbcType=TIMESTAMP}
+    set SID = #{record.SID,jdbcType=VARCHAR},
+      PWD = #{record.PWD,jdbcType=VARCHAR},
+      GPID = #{record.GPID,jdbcType=DECIMAL},
+      LVL = #{record.LVL,jdbcType=DECIMAL},
+      LOCKING = #{record.LOCKING,jdbcType=DECIMAL},
+      UPDT = #{record.UPDT,jdbcType=DATE},
+      CRDT = #{record.CRDT,jdbcType=DATE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -210,34 +210,34 @@
     update POKO.USERINFO
     <set>
       <if test="PWD != null">
-        PWD = #{PWD,jdbcType=NVARCHAR},
+        PWD = #{PWD,jdbcType=VARCHAR},
       </if>
       <if test="GPID != null">
-        GPID = #{GPID,jdbcType=NUMERIC},
+        GPID = #{GPID,jdbcType=DECIMAL},
       </if>
       <if test="LVL != null">
-        LVL = #{LVL,jdbcType=NUMERIC},
+        LVL = #{LVL,jdbcType=DECIMAL},
       </if>
       <if test="LOCKING != null">
-        LOCKING = #{LOCKING,jdbcType=NUMERIC},
+        LOCKING = #{LOCKING,jdbcType=DECIMAL},
       </if>
       <if test="UPDT != null">
-        UPDT = #{UPDT,jdbcType=TIMESTAMP},
+        UPDT = #{UPDT,jdbcType=DATE},
       </if>
       <if test="CRDT != null">
-        CRDT = #{CRDT,jdbcType=TIMESTAMP},
+        CRDT = #{CRDT,jdbcType=DATE},
       </if>
     </set>
-    where SID = #{SID,jdbcType=NVARCHAR}
+    where SID = #{SID,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="jp.matrix.dao.poko.Userinfo">
     update POKO.USERINFO
-    set PWD = #{PWD,jdbcType=NVARCHAR},
-      GPID = #{GPID,jdbcType=NUMERIC},
-      LVL = #{LVL,jdbcType=NUMERIC},
-      LOCKING = #{LOCKING,jdbcType=NUMERIC},
-      UPDT = #{UPDT,jdbcType=TIMESTAMP},
-      CRDT = #{CRDT,jdbcType=TIMESTAMP}
-    where SID = #{SID,jdbcType=NVARCHAR}
+    set PWD = #{PWD,jdbcType=VARCHAR},
+      GPID = #{GPID,jdbcType=DECIMAL},
+      LVL = #{LVL,jdbcType=DECIMAL},
+      LOCKING = #{LOCKING,jdbcType=DECIMAL},
+      UPDT = #{UPDT,jdbcType=DATE},
+      CRDT = #{CRDT,jdbcType=DATE}
+    where SID = #{SID,jdbcType=VARCHAR}
   </update>
 </mapper>
