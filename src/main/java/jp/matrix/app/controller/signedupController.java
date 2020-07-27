@@ -2,6 +2,7 @@ package jp.matrix.app.controller;
 
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 
@@ -77,22 +78,9 @@ public class signedupController {
 			model.setViewName("signedup.html");
 			return model;
 		}
-	    org.springframework.http.HttpRequest req = new ServletServerHttpRequest(request);
-	    UriComponentsBuilder builder = UriComponentsBuilder.fromHttpRequest(req);
-
-	    java.net.URI location = builder.path("/signresult").build().toUri();
-
-		model.setViewName("redirect:" + location.toString());
 		model.addObject("userViewModel", form);
-		
-		return model;
-	}
-	
-	@RequestMapping(value={"/signresult"}, method = RequestMethod.POST)
-	public ModelAndView result(@ModelAttribute UserViewModel form, ModelAndView model)
-	{
+		//model.setViewName("redirect:/signedup/result");
 		model.setViewName("signresult.html");
-		model.addObject("userViewModel", form);
 		
 		return model;
 	}
