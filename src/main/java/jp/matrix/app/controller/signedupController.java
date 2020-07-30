@@ -61,7 +61,8 @@ public class signedupController {
 			User user = new User();
 			user.setName(form.getUserId());
 			user.setPassword(enc.encode(form.getNewPassword()));
-			if (us.countByUsername(user.getName())> 0)
+			int cnt = us.countByUsername(user.getName());
+			if (cnt> 0 || cnt < 0)
 			{
 				form.setMsg("登録済みのため、登録できません。");
 				model.addObject("userViewModel", form);

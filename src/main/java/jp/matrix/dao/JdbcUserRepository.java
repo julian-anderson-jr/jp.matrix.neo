@@ -95,7 +95,7 @@ public class JdbcUserRepository implements UserRepository {
 		catch(SQLException ex)
 		{
 			log.error(ex.getMessage());
-			res = 0;
+			res = -1;
 		}
 		finally
 		{
