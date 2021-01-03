@@ -2,7 +2,6 @@ package jp.matrix.dao.poko;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class UserinfoExample {
@@ -104,32 +103,6 @@ public class UserinfoExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value.getTime()), property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
-            if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
-            }
-            List<java.sql.Date> dateList = new ArrayList<>();
-            Iterator<Date> iter = values.iterator();
-            while (iter.hasNext()) {
-                dateList.add(new java.sql.Date(iter.next().getTime()));
-            }
-            addCriterion(condition, dateList, property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andSIDIsNull() {
@@ -463,52 +436,52 @@ public class UserinfoExample {
         }
 
         public Criteria andUPDTEqualTo(Date value) {
-            addCriterionForJDBCDate("UPDT =", value, "UPDT");
+            addCriterion("UPDT =", value, "UPDT");
             return (Criteria) this;
         }
 
         public Criteria andUPDTNotEqualTo(Date value) {
-            addCriterionForJDBCDate("UPDT <>", value, "UPDT");
+            addCriterion("UPDT <>", value, "UPDT");
             return (Criteria) this;
         }
 
         public Criteria andUPDTGreaterThan(Date value) {
-            addCriterionForJDBCDate("UPDT >", value, "UPDT");
+            addCriterion("UPDT >", value, "UPDT");
             return (Criteria) this;
         }
 
         public Criteria andUPDTGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("UPDT >=", value, "UPDT");
+            addCriterion("UPDT >=", value, "UPDT");
             return (Criteria) this;
         }
 
         public Criteria andUPDTLessThan(Date value) {
-            addCriterionForJDBCDate("UPDT <", value, "UPDT");
+            addCriterion("UPDT <", value, "UPDT");
             return (Criteria) this;
         }
 
         public Criteria andUPDTLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("UPDT <=", value, "UPDT");
+            addCriterion("UPDT <=", value, "UPDT");
             return (Criteria) this;
         }
 
         public Criteria andUPDTIn(List<Date> values) {
-            addCriterionForJDBCDate("UPDT in", values, "UPDT");
+            addCriterion("UPDT in", values, "UPDT");
             return (Criteria) this;
         }
 
         public Criteria andUPDTNotIn(List<Date> values) {
-            addCriterionForJDBCDate("UPDT not in", values, "UPDT");
+            addCriterion("UPDT not in", values, "UPDT");
             return (Criteria) this;
         }
 
         public Criteria andUPDTBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("UPDT between", value1, value2, "UPDT");
+            addCriterion("UPDT between", value1, value2, "UPDT");
             return (Criteria) this;
         }
 
         public Criteria andUPDTNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("UPDT not between", value1, value2, "UPDT");
+            addCriterion("UPDT not between", value1, value2, "UPDT");
             return (Criteria) this;
         }
 
@@ -523,52 +496,52 @@ public class UserinfoExample {
         }
 
         public Criteria andCRDTEqualTo(Date value) {
-            addCriterionForJDBCDate("CRDT =", value, "CRDT");
+            addCriterion("CRDT =", value, "CRDT");
             return (Criteria) this;
         }
 
         public Criteria andCRDTNotEqualTo(Date value) {
-            addCriterionForJDBCDate("CRDT <>", value, "CRDT");
+            addCriterion("CRDT <>", value, "CRDT");
             return (Criteria) this;
         }
 
         public Criteria andCRDTGreaterThan(Date value) {
-            addCriterionForJDBCDate("CRDT >", value, "CRDT");
+            addCriterion("CRDT >", value, "CRDT");
             return (Criteria) this;
         }
 
         public Criteria andCRDTGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("CRDT >=", value, "CRDT");
+            addCriterion("CRDT >=", value, "CRDT");
             return (Criteria) this;
         }
 
         public Criteria andCRDTLessThan(Date value) {
-            addCriterionForJDBCDate("CRDT <", value, "CRDT");
+            addCriterion("CRDT <", value, "CRDT");
             return (Criteria) this;
         }
 
         public Criteria andCRDTLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("CRDT <=", value, "CRDT");
+            addCriterion("CRDT <=", value, "CRDT");
             return (Criteria) this;
         }
 
         public Criteria andCRDTIn(List<Date> values) {
-            addCriterionForJDBCDate("CRDT in", values, "CRDT");
+            addCriterion("CRDT in", values, "CRDT");
             return (Criteria) this;
         }
 
         public Criteria andCRDTNotIn(List<Date> values) {
-            addCriterionForJDBCDate("CRDT not in", values, "CRDT");
+            addCriterion("CRDT not in", values, "CRDT");
             return (Criteria) this;
         }
 
         public Criteria andCRDTBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("CRDT between", value1, value2, "CRDT");
+            addCriterion("CRDT between", value1, value2, "CRDT");
             return (Criteria) this;
         }
 
         public Criteria andCRDTNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("CRDT not between", value1, value2, "CRDT");
+            addCriterion("CRDT not between", value1, value2, "CRDT");
             return (Criteria) this;
         }
     }

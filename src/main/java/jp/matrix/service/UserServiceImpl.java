@@ -59,17 +59,22 @@ public class UserServiceImpl implements UserService {
 		UserinfoExample ex = new UserinfoExample();
 		UserinfoExample.Criteria cr = ex.createCriteria();
 		cr.andSIDEqualTo(user.getName());
-		cr.andPWDEqualTo(user.getPassword());
-		List<Userinfo> usr = userMapper.selectByExample(ex);
-		if (usr.size() == 1)
+		//cr.andPWDEqualTo(user.getPassword());
+		Userinfo usr = userMapper.selectByPrimaryKey(user.getName());
+		if (!(usr == null))
 		{
-			if (usr.get(0).getLOCKING() == 1)
+			if (usr.getLOCKING() == 1)
 			{
 				log.error(user.getName() + " is lockout now!");
 				return -2; // lockout
 			}
+			if (!usr.getPWD().equals(user.getPassword()))
+			{
+				log.error(user.getName() + " is mistake id or password!");
+				return -3; // password
+			}
 			List<String> role = new ArrayList<String>();
-			switch(usr.get(0).getGPID())
+			switch(usr.getGPID())
 			{
 			case 1:
 				role.add("USER");
@@ -89,16 +94,16 @@ public class UserServiceImpl implements UserService {
 				break;
 			}
 		}
-		else if(usr.size() == 0) 
+		else 
 		{
 			UserinfoExample ex2 = new UserinfoExample();
 			UserinfoExample.Criteria cr2 = ex.createCriteria();
 			cr2.andSIDEqualTo(user.getName());
-			List<Userinfo> usr2 = userMapper.selectByExample(ex2);
-			if (usr2.size() == 1)
+			Userinfo usr2 = userMapper.selectByPrimaryKey(user.getName());
+			if (usr2 != null)
 			{
-				usr2.get(0).setLOCKING((short)1);
-				userMapper.updateByPrimaryKey(usr2.get(0));
+				usr2.setLOCKING((short)1);
+				userMapper.updateByPrimaryKey(usr2);
 				log.error(user.getName() + " is lockout!");
 			}
 			

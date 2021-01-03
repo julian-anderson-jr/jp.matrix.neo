@@ -10,7 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import jp.matrix.service.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import oracle.sql.converter.CharacterConverters;
 
 @Slf4j
 public class JdbcUserRepository implements UserRepository {

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.matrix.mapper.poko.UserinfoMapper">
+  <resultMap id="BaseResultMap" type="jp.matrix.dao.poko.Userinfo">
+    <id column="SID" jdbcType="VARCHAR" property="SID" />
+    <result column="PWD" jdbcType="VARCHAR" property="PWD" />
+    <result column="GPID" jdbcType="DECIMAL" property="GPID" />
+    <result column="LVL" jdbcType="DECIMAL" property="LVL" />
+    <result column="LOCKING" jdbcType="DECIMAL" property="LOCKING" />
+    <result column="UPDT" jdbcType="TIMESTAMP" property="UPDT" />
+    <result column="CRDT" jdbcType="TIMESTAMP" property="CRDT" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SID, PWD, GPID, LVL, LOCKING, UPDT, CRDT
+  </sql>
+  <select id="selectByExample" parameterType="jp.matrix.dao.poko.UserinfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from POKO.USERINFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from POKO.USERINFO
+    where SID = #{SID,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from POKO.USERINFO
+    where SID = #{SID,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="jp.matrix.dao.poko.UserinfoExample">
+    delete from POKO.USERINFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="jp.matrix.dao.poko.Userinfo">
+    insert into POKO.USERINFO (SID, PWD, GPID, 
+      LVL, LOCKING, UPDT, 
+      CRDT)
+    values (#{SID,jdbcType=VARCHAR}, #{PWD,jdbcType=VARCHAR}, #{GPID,jdbcType=DECIMAL}, 
+      #{LVL,jdbcType=DECIMAL}, #{LOCKING,jdbcType=DECIMAL}, #{UPDT,jdbcType=TIMESTAMP}, 
+      #{CRDT,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="jp.matrix.dao.poko.Userinfo">
+    insert into POKO.USERINFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="SID != null">
+        SID,
+      </if>
+      <if test="PWD != null">
+        PWD,
+      </if>
+      <if test="GPID != null">
+        GPID,
+      </if>
+      <if test="LVL != null">
+        LVL,
+      </if>
+      <if test="LOCKING != null">
+        LOCKING,
+      </if>
+      <if test="UPDT != null">
+        UPDT,
+      </if>
+      <if test="CRDT != null">
+        CRDT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="SID != null">
+        #{SID,jdbcType=VARCHAR},
+      </if>
+      <if test="PWD != null">
+        #{PWD,jdbcType=VARCHAR},
+      </if>
+      <if test="GPID != null">
+        #{GPID,jdbcType=DECIMAL},
+      </if>
+      <if test="LVL != null">
+        #{LVL,jdbcType=DECIMAL},
+      </if>
+      <if test="LOCKING != null">
+        #{LOCKING,jdbcType=DECIMAL},
+      </if>
+      <if test="UPDT != null">
+        #{UPDT,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CRDT != null">
+        #{CRDT,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="jp.matrix.dao.poko.UserinfoExample" resultType="java.lang.Long">
+    select count(*) from POKO.USERINFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update POKO.USERINFO
+    <set>
+      <if test="record.SID != null">
+        SID = #{record.SID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PWD != null">
+        PWD = #{record.PWD,jdbcType=VARCHAR},
+      </if>
+      <if test="record.GPID != null">
+        GPID = #{record.GPID,jdbcType=DECIMAL},
+      </if>
+      <if test="record.LVL != null">
+        LVL = #{record.LVL,jdbcType=DECIMAL},
+      </if>
+      <if test="record.LOCKING != null">
+        LOCKING = #{record.LOCKING,jdbcType=DECIMAL},
+      </if>
+      <if test="record.UPDT != null">
+        UPDT = #{record.UPDT,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.CRDT != null">
+        CRDT = #{record.CRDT,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update POKO.USERINFO
+    set SID = #{record.SID,jdbcType=VARCHAR},
+      PWD = #{record.PWD,jdbcType=VARCHAR},
+      GPID = #{record.GPID,jdbcType=DECIMAL},
+      LVL = #{record.LVL,jdbcType=DECIMAL},
+      LOCKING = #{record.LOCKING,jdbcType=DECIMAL},
+      UPDT = #{record.UPDT,jdbcType=TIMESTAMP},
+      CRDT = #{record.CRDT,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="jp.matrix.dao.poko.Userinfo">
+    update POKO.USERINFO
+    <set>
+      <if test="PWD != null">
+        PWD = #{PWD,jdbcType=VARCHAR},
+      </if>
+      <if test="GPID != null">
+        GPID = #{GPID,jdbcType=DECIMAL},
+      </if>
+      <if test="LVL != null">
+        LVL = #{LVL,jdbcType=DECIMAL},
+      </if>
+      <if test="LOCKING != null">
+        LOCKING = #{LOCKING,jdbcType=DECIMAL},
+      </if>
+      <if test="UPDT != null">
+        UPDT = #{UPDT,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CRDT != null">
+        CRDT = #{CRDT,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SID = #{SID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="jp.matrix.dao.poko.Userinfo">
+    update POKO.USERINFO
+    set PWD = #{PWD,jdbcType=VARCHAR},
+      GPID = #{GPID,jdbcType=DECIMAL},
+      LVL = #{LVL,jdbcType=DECIMAL},
+      LOCKING = #{LOCKING,jdbcType=DECIMAL},
+      UPDT = #{UPDT,jdbcType=TIMESTAMP},
+      CRDT = #{CRDT,jdbcType=TIMESTAMP}
+    where SID = #{SID,jdbcType=VARCHAR}
+  </update>
+</mapper>

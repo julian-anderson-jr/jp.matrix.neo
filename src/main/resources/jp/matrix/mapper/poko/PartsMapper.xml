@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.matrix.mapper.poko.PartsMapper">
+  <resultMap id="BaseResultMap" type="jp.matrix.dao.poko.Parts">
+    <id column="PID" jdbcType="DECIMAL" property="PID" />
+    <result column="PNAME" jdbcType="VARCHAR" property="PNAME" />
+    <result column="PRICE" jdbcType="DECIMAL" property="PRICE" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PID, PNAME, PRICE
+  </sql>
+  <select id="selectByExample" parameterType="jp.matrix.dao.poko.PartsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from POKO.PARTS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from POKO.PARTS
+    where PID = #{PID,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from POKO.PARTS
+    where PID = #{PID,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="jp.matrix.dao.poko.PartsExample">
+    delete from POKO.PARTS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="jp.matrix.dao.poko.Parts">
+    insert into POKO.PARTS (PID, PNAME, PRICE
+      )
+    values (#{PID,jdbcType=DECIMAL}, #{PNAME,jdbcType=VARCHAR}, #{PRICE,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="jp.matrix.dao.poko.Parts">
+    insert into POKO.PARTS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="PID != null">
+        PID,
+      </if>
+      <if test="PNAME != null">
+        PNAME,
+      </if>
+      <if test="PRICE != null">
+        PRICE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="PID != null">
+        #{PID,jdbcType=DECIMAL},
+      </if>
+      <if test="PNAME != null">
+        #{PNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="PRICE != null">
+        #{PRICE,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="jp.matrix.dao.poko.PartsExample" resultType="java.lang.Long">
+    select count(*) from POKO.PARTS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update POKO.PARTS
+    <set>
+      <if test="record.PID != null">
+        PID = #{record.PID,jdbcType=DECIMAL},
+      </if>
+      <if test="record.PNAME != null">
+        PNAME = #{record.PNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PRICE != null">
+        PRICE = #{record.PRICE,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update POKO.PARTS
+    set PID = #{record.PID,jdbcType=DECIMAL},
+      PNAME = #{record.PNAME,jdbcType=VARCHAR},
+      PRICE = #{record.PRICE,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="jp.matrix.dao.poko.Parts">
+    update POKO.PARTS
+    <set>
+      <if test="PNAME != null">
+        PNAME = #{PNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="PRICE != null">
+        PRICE = #{PRICE,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where PID = #{PID,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="jp.matrix.dao.poko.Parts">
+    update POKO.PARTS
+    set PNAME = #{PNAME,jdbcType=VARCHAR},
+      PRICE = #{PRICE,jdbcType=DECIMAL}
+    where PID = #{PID,jdbcType=DECIMAL}
+  </update>
+</mapper>

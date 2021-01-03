@@ -85,9 +85,6 @@ public class AppConfig {
 		Environment environment = new Environment("development", transactionFactory, dataSource);
 		
 		org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration(environment);
-		configuration.addMapper(BuylistMapper.class);
-		configuration.addMapper(GroupinfoMapper.class);
-		configuration.addMapper(PartsMapper.class);
 		configuration.addMapper(UserinfoMapper.class);
 		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
 

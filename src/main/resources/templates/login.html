@@ -39,10 +39,10 @@ body {
 <header>
 Spring Boot
 </header>
-<form name="signedup" method="POST" th:ACTION="@{/signedup}">
+<form name="signedup" method="POST" th:ACTION="@{/login}">
 <div id="content">
 <table>
-<tr><td colspan="3">ユーザー登録</td></tr>
+<tr><td colspan="3">ログイン</td></tr>
 <tr><td>ユーザーID</td>
 <td><input type="text" maxlength="10" th:field="*{userId}" placeholder="USERID" /><span class="text-danger">*</span>
 </td><td><span id="UserId-errors" th:errors="*{userId}" class="text-danger">error</span>

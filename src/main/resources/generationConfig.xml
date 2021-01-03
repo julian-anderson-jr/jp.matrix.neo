@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-  <classPathEntry location="/usr/src/neo/lib/ojdbc14.jar" />
+  <classPathEntry location="/usr/src/neo/lib/ojdbc6.jar" />  
   <context id="OracleTables" targetRuntime="MyBatis3">
 	<commentGenerator>
 		<property name="suppressAllComments" value="true" />
@@ -26,7 +26,7 @@
     </javaModelGenerator>
 
     <!-- SQL 設定が記述された XML を生成する設定 -->
-    <sqlMapGenerator targetPackage="mapper" targetProject="neo/src/main/resources">
+    <sqlMapGenerator targetPackage="jp.matrix.mapper" targetProject="neo/src/main/resources">
       <property name="enableSubPackages" value="true" />
     </sqlMapGenerator>
     <!-- マッパークラスを生成する設定 -->
